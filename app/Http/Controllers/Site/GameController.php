@@ -21,7 +21,7 @@ class GameController extends Controller
         $gameteams = GameTeam::all();
         $modalities = Modality::all();
         $games = Game::all();
-        dd($games);
+        //dd($games);
 
         return view('site/game/live',compact('gameteams','modalities','games'));
     }
