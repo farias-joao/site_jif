@@ -1,16 +1,16 @@
 @extends('adminlte::page')
 
-@section('title', 'Comentário')
+@section('title', 'Modalidade')
 
 @section('content_header')
 
     <ol class="breadcrumb">
         <li><a href=" ">Dashboard</a></li>
-        <li><a href=" ">Comentarios</a></li>
+        <li><a href=" ">Modalidade</a></li>
         @if(isset($comment))
-            <li><a href="">Editar Comentario</a></li>
+            <li><a href="">Editar Modalidade</a></li>
         @else
-            <li><a href="">Novo Comentario</a></li>
+            <li><a href="">Nova Modalidade</a></li>
         @endif
     </ol>
 @stop

@@ -7,6 +7,7 @@ use App\Models\Game;
 use App\Models\GameTeam;
 use App\Models\Result;
 use App\Models\ResultScoreboard;
+use App\Models\Round;
 use App\Models\Scoreboard;
 use App\Models\Team;
 use Illuminate\Http\Request;
@@ -60,9 +61,11 @@ class ScoreboardController extends Controller
             $scoreboard = new Scoreboard;
 
             $scoreboard->points = $request->points;
-            $scoreboard->round = $request->round;
+            $round = new Round;
+            $round->round_number = $request->round;
             $scoreboard->status = $request->get('selectStatus');
             $result->scoreboards()->save($scoreboard);
+            $scoreboard->round()->save($round);
 
             DB::commit();
         }elseif($result){
@@ -91,6 +94,7 @@ class ScoreboardController extends Controller
      */
     public function show(Scoreboard $scoreboard)
     {
+
         return view('admin/scoreboard.show', compact('scoreboard'));
     }
 
@@ -103,8 +107,10 @@ class ScoreboardController extends Controller
     public function edit(Scoreboard $scoreboard)
     {
         $action = action('Admin\ScoreboardController@update', $scoreboard->id);
+        $game_teams = GameTeam::all();
+        $teams = Team::all();
 
-        return view('admin/scoreboard.edit', compact('scoreboard', "action"));
+        return view('admin/scoreboard.edit', compact('scoreboard', "action",'game_teams','teams'));
     }
 
     /**
@@ -117,10 +123,12 @@ class ScoreboardController extends Controller
     public function update(Request $request, Scoreboard $scoreboard)
     {
         $scoreboard->points = $request->points;
-        $scoreboard->round = $request->round;
 
         $scoreboard->save();
         $request->session()->flash('alert-success', 'Placar alterado com sucesso!');
+
+        broadcast(new \App\Events\ScoreboardEvent($scoreboard));
+
         return redirect("admin\scoreboards");
     }
 

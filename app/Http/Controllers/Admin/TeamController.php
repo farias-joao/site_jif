@@ -57,7 +57,6 @@ class TeamController extends Controller
         $punctuation = new Punctuation;
 
         $punctuation->total_points = 0;
-        $punctuation->team_id = $team->id;
         $punctuation->total_wins = 0;
         $punctuation->total_loses = 0;
         $punctuation->total_draw = 0;

@@ -1,5 +1,15 @@
 @extends('adminlte::page')
 
+@section('title', 'Jogos')
+
+@section('content_header')
+    <h1>Jogos</h1>
+
+    <ol class="breadcrumb">
+        <li><a href=" ">Dashboard</a></li>
+        <li><a href=" ">Jogos</a></li>
+    </ol>
+@stop
 @section('content')
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
