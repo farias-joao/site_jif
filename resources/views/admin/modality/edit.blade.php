@@ -1,1 +1,1 @@
-@include('admin/modality.forms.modality')
+@include('admin.modality.components.modal-insert-modality')

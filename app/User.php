@@ -20,6 +20,18 @@ class User extends Authenticatable
         'name', 'email', 'password',
     ];
 
+
+    /*protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+    }*/
+    public $rules = [
+        'name' => ['required','min:4','max:255']
+    ];
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -40,22 +52,22 @@ class User extends Authenticatable
 
     public function teams()
     {
-        return $this->hasMany('App\Team');
+        return $this->hasMany('App\Models\Team');
     }
 
     public function notices()
     {
-        return $this->hasMany('App\Notice');
-    }
-
-    public function typeuser()
-    {
-        return $this->belongsTo('App\TypeUser');
+        return $this->hasMany('App\Models\Notice');
     }
 
     public function comments()
     {
-        return $this->hasManyThrough('App\Comment', 'App\Notice');
+        return $this->hasManyThrough('App\Models\Comment', 'App\Models\Notice');
+    }
+
+    public function image()
+    {
+        return $this->belongsTo('App\Models\Image');
     }
 
     public function roles()

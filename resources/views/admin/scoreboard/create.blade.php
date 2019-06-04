@@ -1,1 +1,1 @@
-@include('admin/scoreboard/forms.scoreboard')
+@include('admin.scoreboard.components.modal-insert-scoreboard')

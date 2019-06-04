@@ -13,11 +13,21 @@ class DatabaseSeeder extends Seeder
     {
         // $this->call(UsersTableSeeder::class);
 
-        echo "Criando 1 tipos de usuarios...\n";
-        factory(App\Models\TypeUser::class, 1)->create();
+        echo "Criando 2 locais...\n";
+        factory(App\Models\Local::class, 2)->create();
+
+        echo "Criando 2 enderecos...\n";
+        factory(App\Models\Address::class, 2)->create();
+
+        echo "Criando 1 funcao...\n";
+        factory(\App\Models\Role::class, 1)->create();
 
         echo "Criando 1 usuarios...\n";
         factory(App\User::class, 1)->create();
+
+        echo "Criando 1 funcao usuario...\n";
+        factory(\App\Models\RoleUser::class, 1)->create();
+
 
        /* echo "Criando 4 solicitacoes...\n";
         factory(App\Models\Solicitation::class, 4)->create();

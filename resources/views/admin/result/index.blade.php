@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@include('admin.result.components.modal-insert-result')
+
 @section('title', 'Resultados')
 
 @section('content_header')
@@ -27,10 +29,9 @@
 
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\ResultController@create') }}"
-               title="Criar Comentario">Novo</a>
+               data-toggle="modal" data-target="#modalResult"
+               title="Criar Resultado">Novo</a>
 
         </div>
         <div class="box-body">
@@ -65,8 +66,7 @@
                                       action="{{ action('Admin\ResultController@destroy', $result->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}
-                                    <a class="btn btn-primary"
-                                       href="{{ action('Admin\ResultController@edit', $result->id) }}"
+                                    <a class="btn btn-primary edit"
                                        title="Editar Resultado">Editar</a>
                                     <button type="submit" class="btn btn-danger delete-button"
                                             onclick="return confirm('Tem certeza?');" )>Apagar

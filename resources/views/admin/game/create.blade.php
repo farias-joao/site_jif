@@ -1,1 +1,1 @@
-@include('admin/game/forms.game')
+@include('admin.game.components.modal-form-game')

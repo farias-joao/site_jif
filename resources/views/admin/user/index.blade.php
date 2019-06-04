@@ -12,6 +12,8 @@
 @stop
 
 @section('content')
+    @include('admin.user.components.modal-insert-user')
+
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
@@ -24,10 +26,10 @@
     </div>
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\UserController@create') }}"
-               title="Editar usuario">Novo</a>
+               data-toggle="modal" data-target="#modalUser"
+               id="openForm"
+               title="Novo usuario">Novo</a>
 
         </div>
         <div class="box-body">
@@ -35,7 +37,8 @@
                 <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Name</th>
+                    <th>Nome</th>
+                    <th>Função</th>
                     <th>Email</th>
                     <th>Ação</th>
                 </tr>
@@ -45,20 +48,27 @@
                     <tr>
                         <td>{{ $user->id }}</td>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>
-                            <form method="post"
-                                  action="{{ action('Admin\UserController@destroy', $user->id) }}">
-                                {{ csrf_field() }}
-                                {{ method_field('delete') }}
-                                <a class="btn btn-primary"
-                                   href="{{ action('Admin\UserController@edit', $user->id) }}"
-                                   title="Editar usuario">Editar</a>
-                                <button type="submit" class="btn btn-danger delete-button"
-                                        onclick="return confirm('Tem certeza?');" )>Apagar
-                                </button>
-                            </form>
-                        </td>
+                        @foreach($user->roles as $role)
+                            @if(count($user->roles) == 1)
+                                <td>{{$role->name}}</td>
+                            @else
+                                <td>{{$role->name}},
+                                    @endif
+                                </td>
+                                @endforeach
+                                <td>{{ $user->email }}</td>
+                                <td>
+                                    <form method="post"
+                                          action="{{ action('Admin\UserController@destroy', $user->id) }}">
+                                        {{ csrf_field() }}
+                                        {{ method_field('delete') }}
+                                        <a class="btn btn-primary edit"
+                                           title="Editar usuario">Editar</a>
+                                        <button type="submit" class="btn btn-danger delete-button"
+                                                onclick="return confirm('Tem certeza?');" )>Apagar
+                                        </button>
+                                    </form>
+                                </td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -80,5 +90,49 @@
                 }
             });
         })
+    </script>
+
+    <script>
+        jQuery(document).ready(function(){
+            jQuery('#insertSubmit').click(function(e){
+                e.preventDefault();
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+                jQuery.ajax({
+                    url: "{{ url('admin/users') }}",
+                    method: 'post',
+                    data: {
+                        name: jQuery('#name').val(),
+                        local: jQuery('#selectLocal').val(),
+                        siape: jQuery('#siape').val(),
+                        email: jQuery('#email').val(),
+                        password: jQuery('#password').val(),
+                        selectRole: jQuery('#selectRole').val(),
+                        imgUp: jQuery('#imgUp').val(),
+                    },
+
+                    success: function(result){
+                        if(result.errors)
+                        {
+                            jQuery('.alert-danger').html('');
+
+                            jQuery.each(result.errors, function(key, value){
+                                jQuery('.alert-danger').show();
+                                jQuery('.alert-danger').append('<li>'+value+'</li>');
+                            });
+                        }
+                        else
+                        {
+                            jQuery('.alert-danger').hide();
+                            $('#openForm').hide();
+                            $('#modalUser').modal('hide');
+                        }
+                    },
+                });
+            });
+        });
     </script>
 @endpush

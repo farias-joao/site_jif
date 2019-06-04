@@ -127,6 +127,10 @@ class ScoreboardController extends Controller
         $scoreboard->save();
         $request->session()->flash('alert-success', 'Placar alterado com sucesso!');
 
+/*        $game = Game::with('teams')->where('id','=',$request->get('selectGame'))->get();
+
+        broadcast(new \App\Events\GameEvent($game));*/
+
         broadcast(new \App\Events\ScoreboardEvent($scoreboard));
 
         return redirect("admin\scoreboards");

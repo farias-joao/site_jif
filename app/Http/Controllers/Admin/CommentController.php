@@ -23,7 +23,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::orderBy('created_at', 'desc')->get();
+        $comments = Comment::with('game','notice')->get();
         return view('admin/comment.index', compact('comments'));
     }
 
@@ -113,6 +113,15 @@ class CommentController extends Controller
 
         $comment->save();
         $request->session()->flash('alert-success', 'Comentario alterado com sucesso!');
+        return redirect("admin\comments");
+    }
+
+    public function aprove(Request $request, Comment $comment)
+    {
+        $comment->solicitation->status = 1;
+
+        $comment->save();
+        $request->session()->flash('alert-success', 'Comentario aprovado!');
         return redirect("admin\comments");
     }
 

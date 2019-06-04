@@ -24,7 +24,15 @@ class userValidations extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => 'required|min:4|max:255',
         ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Campo nome é requerido',
+            'name.min' => 'Minimo 4 letras',
+            'name.max' => 'máximo 255 letras'];
     }
 }

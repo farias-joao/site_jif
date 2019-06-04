@@ -1,1 +1,1 @@
-@include('admin/player/forms.player')
+@include('admin.player.components.modal-insert-player')

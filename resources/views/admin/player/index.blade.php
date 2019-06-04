@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@include('admin.player.components.modal-insert-player')
+
 @section('title', 'Usuários')
 
 @section('content_header')
@@ -23,10 +25,9 @@
     </div>
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\PlayerController@create') }}"
-               title="Criar Comentario">Novo</a>
+               data-toggle="modal" data-target="#modalPlayer"
+               title="Novo Jogador">Novo</a>
 
         </div>
         <div class="box-body">

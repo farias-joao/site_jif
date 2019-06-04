@@ -1,1 +1,1 @@
-@include('admin/local/forms.local')
+@include('admin.local.components.modal-insert-local')

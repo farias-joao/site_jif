@@ -61,7 +61,7 @@ class NoticeController extends Controller
 
 
         $notice->save();
-        $request->session()->flash('alert-success', 'Noticia criada com sucesso!');
+        $request->session()->flash('alert-success', 'Noticia.php criada com sucesso!');
         return redirect()->route('admin.notices.index');
     }
 
@@ -106,7 +106,7 @@ class NoticeController extends Controller
         $notice->content = $request->content;
 
         $notice->save();
-        $request->session()->flash('alert-success', 'Noticia alterada com sucesso!');
+        $request->session()->flash('alert-success', 'Noticia.php alterada com sucesso!');
         return redirect("admin/notices");
     }
 
@@ -120,7 +120,7 @@ class NoticeController extends Controller
     public function destroy(Request $request, Notice $notice)
     {
         $notice->delete();
-        $request->session()->flash('alert-success', 'Noticia apagada com sucesso!');
+        $request->session()->flash('alert-success', 'Noticia.php apagada com sucesso!');
         return redirect()->back();
     }
 }

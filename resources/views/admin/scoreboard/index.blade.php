@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@include('admin.scoreboard.components.modal-insert-scoreboard')
+
 @section('title', 'Placares')
 
 @section('content_header')
@@ -26,10 +28,9 @@
 
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\ScoreboardController@create') }}"
-               title="Criar Comentario">Novo</a>
+               data-toggle="modal" data-target="#modalScoreboard"
+               title="Criar Placar">Novo</a>
 
         </div>
         <div class="box-body">
@@ -53,8 +54,7 @@
                                   action="{{ action('Admin\ScoreboardController@destroy', $scoreboard->id) }}">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <a class="btn btn-primary"
-                                   href="{{ action('Admin\ScoreboardController@edit', $scoreboard->id) }}"
+                                <a class="btn btn-primary edit"
                                    title="Editar placar">Editar</a>
                                 <button type="submit" class="btn btn-danger delete-button"
                                         onclick="return confirm('Tem certeza?');" )>Apagar

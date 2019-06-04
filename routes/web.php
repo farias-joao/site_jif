@@ -17,7 +17,6 @@ Route::group(['middleware' => ['auth'],'namespace' => 'Admin', 'prefix' => 'admi
 
     Route::resources([
         'users' => 'UserController',
-        'typeusers' => 'TypeUserController',
         'modalities' => 'ModalityController',
         'teams' => 'TeamController',
         'address' => 'AddressController',

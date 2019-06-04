@@ -35,8 +35,10 @@ class GameController extends Controller
     public function index()
     {
         $game_teams = GameTeam::orderBy('created_at', 'desc')->get();
+        $locals = Local::all();
+        $modalities = Modality::all();
 
-        return view('admin/game.index', compact('game_teams'));
+        return view('admin/game.index', compact('game_teams','locals','modalities'));
     }
 
     /**
@@ -68,8 +70,7 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public
-    function store(Request $request)
+    public function store(Request $request)
     {
         $game = new Game;
 
@@ -131,10 +132,20 @@ class GameController extends Controller
     public
     function update(Request $request, Game $game)
     {
-        $game->local_id = $request->local_id;
-        $game->data = $request->data;
-        $game->schedule = $request->schedule;
+        $game->local_id = $request->get('edit_local_id');
+        $game->data = date('Y-m-d', strtotime(str_replace("/", "-", $request->data)));
+        $game->schedule = date("H:i:s", strtotime($request->schedule));
+        $game->modality_id = $request->get('edit_modality_id');
+        $game->status = $request->get('edit_status_game');
 
+        $game_teams = GameTeam::all()->where('game_id',$game->id);
+
+        foreach ($request->get('edit_selectTeams') as $team) {
+            foreach ($game_teams as $game_team){
+                $game_team->team_id = $team;
+             }
+            $game->gameteams()->save($game_teams);
+        }
         $game->save();
         $this->roundInit($game);
         $request->session()->flash('alert-success', 'Jogo alterado com sucesso!');

@@ -12,6 +12,8 @@
 @stop
 
 @section('content')
+    @include('admin.modality.components.modal-insert-modality')
+    @include('admin.modality.components.modal-update-modality')
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
             @if(Session::has('alert-' . $msg))
@@ -23,10 +25,9 @@
 
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\ModalityController@create') }}"
-               title="Criar Comentario">Novo</a>
+               data-toggle="modal" data-target="#modalModality"
+               title="Criar Modalidade">Novo</a>
 
         </div>
         <div class="box-body">

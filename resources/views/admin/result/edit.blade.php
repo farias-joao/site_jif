@@ -1,1 +1,1 @@
-@include('admin/result/forms.result')
+@include('admin.result.components.modal-insert-result')

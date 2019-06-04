@@ -21,6 +21,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('score-component', require('./components/ScoreboardComponent.vue').default);
+Vue.component('game-component', require('./components/GameComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -34,4 +35,10 @@ const app = new Vue({
 
 const score = new Vue({
     el: '#score',
+    data:'score'
 });
+
+/*
+const game = new Vue({
+    el: '#game',
+});*/

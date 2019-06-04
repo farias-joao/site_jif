@@ -31,6 +31,7 @@
                 .listen('CommentEvent', (e) => {
                     console.log(e);
                     this.messages.push(e);
+                    console.log(this.messages.push(e));
                 });
         }
     }

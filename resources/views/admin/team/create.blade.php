@@ -1,1 +1,1 @@
-@include('admin/team/forms.team')
+@include('admin.team.components.modal-insert-team')

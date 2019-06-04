@@ -14,12 +14,11 @@ class AdminController extends Controller
     public function index()
     {
         $count_user = User::all()->count();
-        $count_typeuser = TypeUser::all()->count();
         $count_modality = Modality::all()->count();
         $count_team = Team::all()->count();
 
         if(auth()->user()->can('adm')){
-            return view('admin\home.index', compact('count_user', 'count_typeuser', 'count_modality', 'count_team'));
+            return view('admin\home.index', compact('count_user','count_modality', 'count_team'));
         }elseif(auth()->user()->can('técnico')){
             return view('admin\home.technician');
         }elseif (auth()->user()->can('editor')){

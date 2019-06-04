@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@include('admin.local.components.modal-insert-local')
+
 @section('content')
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -9,11 +11,12 @@
             @endif
         @endforeach
     </div>
+
     <div class="box">
         <div class="box-header">
             {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\LocalController@create') }}"
+               data-toggle="modal" data-target="#modalLocal"
                title="Criar Local">Novo</a>
 
         </div>
@@ -37,8 +40,7 @@
                             <form method="post" action="{{ action('Admin\LocalController@destroy', $local->id) }}">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <a class="btn btn-primary"
-                                   href="{{ action('Admin\LocalController@edit', $local->id) }}"
+                                <a class="btn btn-primary edit"
                                    title="Editar local">Editar</a>
                                 <button type="submit" class="btn btn-danger delete-button"
                                         onclick="return confirm('Tem certeza?');" )>Apagar

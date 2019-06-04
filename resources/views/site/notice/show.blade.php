@@ -1,6 +1,6 @@
 @extends('site.home.master')
 
-@section('title','Noticia')
+@section('title','Noticia.php')
 
 @section('content')
     <div class="flash-message">

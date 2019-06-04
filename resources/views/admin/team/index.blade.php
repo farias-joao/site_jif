@@ -1,5 +1,7 @@
 @extends('adminlte::page')
 
+@include('admin.team.components.modal-insert-team')
+
 @section('title', 'Times')
 
 @section('content_header')
@@ -25,10 +27,9 @@
 
     <div class="box">
         <div class="box-header">
-            {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
             <a class="btn btn-primary"
-               href="{{ action('Admin\TeamController@create') }}"
-               title="Criar Comentario">Novo</a>
+               data-toggle="modal" data-target="#modalTeam"
+               title="Criar Time">Novo</a>
 
         </div>
         <div class="box-body">
@@ -53,8 +54,7 @@
                             <form method="post" action="{{ action('Admin\TeamController@destroy', $team->id) }}">
                                 {{ csrf_field() }}
                                 {{ method_field('delete') }}
-                                <a class="btn btn-primary"
-                                   href="{{ action('Admin\TeamController@edit', $team->id) }}"
+                                <a class="btn btn-primary edit"
                                    title="Editar time">Editar</a>
                                 <button type="submit" class="btn btn-danger delete-button"
                                         onclick="return confirm('Tem certeza?');" )>Apagar

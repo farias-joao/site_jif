@@ -20,7 +20,7 @@ class Game extends Model
 
     public function comments()
     {
-        return $this->hasMany('App\Models\Comment','game_id');
+        return $this->hasMany('App\Models\Comment');
     }
 
     public function gameteams()

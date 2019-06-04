@@ -43,16 +43,21 @@ class UserController extends Controller
     {
         $user = new User;
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->cpf = $request->cpf;
-        $user->type_user_id = $request->get('selectTypeUser');
-        $user->password = bcrypt($request->password);
+        if($this->validate($request,$user->rules)) {
 
-        $user->save();
-        $request->session()->flash('alert-success', 'Usuario criado com sucesso!');
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->cpf = $request->cpf;
+            $user->type_user_id = $request->get('selectTypeUser');
+            $user->password = bcrypt($request->password);
 
-        return redirect()->route('admin.users.index');
+            $user->save();
+            $request->session()->flash('alert-success', 'Usuario criado com sucesso!');
+            return response()->json('alert-success', 'Usuario criado com sucesso!');
+        }else{
+            return response()->json(['errors'=>$this->validate($request,$user->rules)]);
+        }
+        /*return redirect()->route('admin.users.index');*/
     }
 
     /**

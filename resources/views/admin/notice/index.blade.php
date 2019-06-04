@@ -25,10 +25,9 @@
     </div>
         <div class="box">
             <div class="box-header">
-                {{--<a class="btn btn-primary" href="{{route('users.create')}}">Novo</a>--}}
                 <a class="btn btn-primary"
-                   href="{{ action('Admin\NoticeController@create') }}"
-                   title="Criar Comentario">Novo</a>
+                   data-toggle="modal" data-target="#modalNotice"
+                   title="Criar Noticia">Novo</a>
 
             </div>
             <div class="box-body">
@@ -54,8 +53,7 @@
                                       action="{{ action('Admin\NoticeController@destroy', $notice->id) }}">
                                     {{ csrf_field() }}
                                     {{ method_field('delete') }}
-                                    <a class="btn btn-primary"
-                                       href="{{ action('Admin\NoticeController@edit', $notice->id) }}"
+                                    <a class="btn btn-primary edit"
                                        title="Editar Noticia">Editar</a>
                                     <button type="submit" class="btn btn-danger delete-button"
                                             onclick="return confirm('Tem certeza?');" )>Apagar
