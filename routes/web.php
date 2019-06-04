@@ -13,6 +13,7 @@
 
 Route::group(['middleware' => ['auth'],'namespace' => 'Admin', 'prefix' => 'admin','as'=>'admin.'],function (){
     Route::get('/', 'AdminController@index')->name('admin.home');
+    Route::get('/roles-permission', 'AdminController@rolesPermission')->name('admin.roles');
 
     Route::resources([
         'users' => 'UserController',
@@ -34,6 +35,13 @@ Route::group(['middleware' => ['auth'],'namespace' => 'Admin', 'prefix' => 'admi
 });
 
 Route::get('/', 'Site\SiteController@index')->name('home');
+Route::get('/teste', function (){
+    return view('teste');
+});
+
+Route::get('/home/{num_page}', 'Site\SiteController@pageNotices')->name('pageNotices');
+Route::get('/team_modality', 'Admin\GameController@teamJson')->name('teamJson');
+Route::get('/games/punctuations', 'Site\GameController@punctuation')->name('punctuations');
 Route::get('sede', 'Site\SiteController@headquarter')->name('headquarter');
 Route::resource('notices', 'Site\NoticeController');
 Route::resource('locals', 'Site\LocalController');

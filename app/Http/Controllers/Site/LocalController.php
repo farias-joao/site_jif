@@ -16,12 +16,7 @@ class LocalController extends Controller
     public function index()
     {
         $locals = Local::all();
-        if (count($locals) > 0) {
-            return view('site.local.index', compact('locals'));
-        } else {
-            return view('site.local.index');
-        }
-
+        return view('site.local.index',compact('locals'));
     }
 
     /**
@@ -48,12 +43,12 @@ class LocalController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  Local $local
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Local $local)
     {
-        //
+        return view('site.local.show',compact('local'));
     }
 
     /**

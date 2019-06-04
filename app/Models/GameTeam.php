@@ -6,23 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class GameTeam extends Model
 {
+    /*public $with = ['team','game','scoreboards','result'];*/
     public function result(){
-        return $this->hasOne('App\Models\Result');
+        return $this->hasOne('App\Models\Result','game_team_id');
     }
 
     public function team(){
-        return $this->belongsTo('App\Models\Team','team_id');
+        return $this->belongsTo('App\Models\Team');
     }
 
     public function game(){
-        return $this->belongsTo('App\Models\Game','game_id');
+        return $this->belongsTo('App\Models\Game');
     }
 
     public function scoreboards(){
-        return $this->hasManyThrough('App\Models\Scoreboards','App\Models\Result');
+        return $this->hasManyThrough('App\Models\Scoreboard','App\Models\Result');
     }
 
-    public function modalitie(){
+    public function modality(){
         return $this->hasOneThrough('App\Models\Modality','App\Models\Team');
     }
 

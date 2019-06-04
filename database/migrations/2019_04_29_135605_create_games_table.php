@@ -16,12 +16,14 @@ class CreateGamesTable extends Migration
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('local_id')->unsigned();
+            $table->integer('modality_id')->unsigned();
             $table->date('data');
             $table->time('schedule');
             $table->integer('status');
             $table->timestamps();
 
             $table->foreign('local_id')->references('id')->on('locals');
+            $table->foreign('modality_id')->references('id')->on('modalities');
         });
     }
 

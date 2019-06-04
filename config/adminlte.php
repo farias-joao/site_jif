@@ -110,14 +110,15 @@ return [
     'menu' => [
         'MENU',
         [
-            'text'        => 'DashBoard',
-            'url'         => 'admin',
-            'icon'        => 'dashboard',
+            'text' => 'DashBoard',
+            'url' => 'admin',
+            'icon' => 'dashboard',
         ],
 
         [
             'text' => 'Usuarios',
             'icon' => 'user',
+            'can' => [ 'adm'],
             'submenu' => [
                 [
                     'text' => 'Tipo Usuarios',
@@ -132,6 +133,7 @@ return [
         [
             'text' => 'Esportes',
             'icon' => 'bicycle',
+            'can' => ['adm', 'técnico'],
             'submenu' => [
                 [
                     'text' => 'Modalidades',
@@ -154,6 +156,7 @@ return [
         [
             'text' => 'Locais',
             'icon' => 'building',
+            'can' => ['adm', 'técnico'],
             'submenu' => [
                 [
                     'text' => 'Locais',
@@ -168,6 +171,7 @@ return [
         [
             'text' => 'Noticias',
             'icon' => 'comments',
+            'can' => ['adm', 'técnico', 'editor'],
             'submenu' => [
                 [
                     'text' => 'Noticias',
@@ -186,6 +190,7 @@ return [
         [
             'text' => 'Times',
             'icon' => 'users',
+            'can' => ['adm', 'técnico'],
             'submenu' => [
                 [
                     'text' => 'Jogadores',
@@ -204,6 +209,7 @@ return [
         [
             'text' => 'Galeria',
             'icon' => 'picture-o',
+            'can' => ['adm','editor','técnico'],
             'submenu' => [
                 [
                     'text' => 'Adicionar',
@@ -246,7 +252,7 @@ return [
 
     'plugins' => [
         'datatables' => true,
-        'select2'    => true,
-        'chartjs'    => true,
+        'select2' => true,
+        'chartjs' => true,
     ],
 ];

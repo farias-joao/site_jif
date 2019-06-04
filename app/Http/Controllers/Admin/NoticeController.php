@@ -84,6 +84,9 @@ class NoticeController extends Controller
      */
     public function edit(Notice $notice)
     {
+
+        $this->authorize('update-notice',$notice);
+
         $action = action('Admin\NoticeController@update', $notice->id);
 
         return view('admin/notice.edit', compact('notice', "action"));

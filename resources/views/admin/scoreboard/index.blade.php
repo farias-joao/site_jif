@@ -1,5 +1,16 @@
 @extends('adminlte::page')
 
+@section('title', 'Placares')
+
+@section('content_header')
+    <h1>Placares</h1>
+
+    <ol class="breadcrumb">
+        <li><a href=" ">Dashboard</a></li>
+        <li><a href=" ">Placares</a></li>
+    </ol>
+@stop
+
 @section('content')
     <div class="flash-message">
         @foreach (['danger', 'warning', 'success', 'info'] as $msg)
@@ -36,7 +47,7 @@
                     <tr>
                         <td>{{ $scoreboard->id }}</td>
                         <td>{{ $scoreboard->points }}</td>
-                        <td>{{ $scoreboard->round }}</td>
+                        <td>{{ $scoreboard->round->round_number }}</td>
                         <td>
                             <form method="post"
                                   action="{{ action('Admin\ScoreboardController@destroy', $scoreboard->id) }}">

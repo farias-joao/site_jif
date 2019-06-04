@@ -15,7 +15,7 @@
                             @if(isset($locals))
                                 <ul>
                                     @foreach($locals as $local)
-                                        <li><a>{{$local->alias}}</a></li>
+                                        <li><a href="{{ action('Site\LocalController@show',$local) }}">{{$local->alias}}</a></li>
                                     @endforeach
                                 </ul>
                             @else

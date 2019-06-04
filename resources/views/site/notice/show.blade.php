@@ -3,12 +3,23 @@
 @section('title','Noticia')
 
 @section('content')
+    <div class="flash-message">
+        @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+            @if(Session::has('alert-' . $msg))
+
+                <p class="alert alert-{{ $msg }}">{{ Session::get('alert-' . $msg) }} <a href="#" class="close"
+                                                                                         data-dismiss="alert"
+                                                                                         aria-label="fechar">&times;</a>
+                </p>
+            @endif
+        @endforeach
+    </div>
     <section class="blog-post-area section-margin">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
                     <div class="main_blog_details">
-                        <img class="img-fluid" src={{asset("storage/images/$notice->image")}} alt="">
+                        <img class="img-fluid" src={{asset("storage/images/notice/$notice->image")}} alt="">
                         <div class="user_details">
                             <div class="float-right mt-sm-0 mt-3">
                                 <div class="media">
@@ -59,10 +70,15 @@
                     @endif
                     <div class="comment-form">
                         <h4>Deixe um comentário</h4>
-                        <form>
+                        <form method="post" action="{{action('Site\NoticeController@store')}}"
+                              enctype="multipart/form-data">
+                            {{csrf_field()}}
+                            {{method_field('post')}}
+                            <input name="notice_id" id="notice_id" type="hidden"
+                                   value="{{$notice->id}}">
                             <div class="form-group form-inline">
                                 <div class="form-group col-lg-6 col-md-6 name">
-                                    <input type="text" class="form-control" id="name" placeholder="Nome"
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Nome"
                                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Nome'">
                                 </div>
                             </div>
@@ -71,7 +87,9 @@
                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Comentario'"
                                           required=""></textarea>
                             </div>
-                            <a href="#" class="button submit_btn">Enviar Comentário</a>
+                            <button type="submit" class="button submit_btn">
+                                Enviar Comentário
+                            </button>
                         </form>
                     </div>
                 </div>

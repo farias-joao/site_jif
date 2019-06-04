@@ -33,23 +33,31 @@
                         <div class="form-group ">
                             <label class="control-label">Jogo</label>
                             <select class="form-control col-sm-10" id="selectGame" name="selectGame">
+                                @if(isset($scoreboard))
+                                    <option value="{{$scoreboard->result->gameteam->game->id}}">
+                                        {{$scoreboard->result->gameteam->game->id}}
+                                        ------- {{$scoreboard->result->gameteam->game->local->alias}} ------
+                                        {{$scoreboard->result->gameteam->team->team_name}}
+                                    </option>
+                                @else
                                     @foreach($game_teams as $game)
                                         <option value="{{$game->id}}">
                                             {{$game->id}} ------- {{$game->game->local->alias}} ------
-                                                {{$game->team->team_name}}
+                                            {{$game->team->team_name}}
                                         </option>
                                     @endforeach
+                                @endif
                             </select>
                         </div>
 
                         <div class="form-group ">
                             <label class="control-label">Time</label>
                             <select class="form-control col-sm-10" id="selectTeam" name="selectTeam">
-                                    @foreach($teams as $team)
-                                        <option value="{{$team->id}}">
-                                            {{$team->team_name}}
-                                        </option>
-                                    @endforeach
+                                @foreach($teams as $team)
+                                    <option value="{{$team->id}}">
+                                        {{$team->team_name}}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
 
@@ -62,7 +70,11 @@
                             <div class="col-xs-3">
                                 <label class="control-label" for="round">Rodada</label>
                                 <input id="round" name="round"
-                                       value="@if(!isset($scoreboard->round)){{ ''}}@else {{$scoreboard->round}}@endif"></input>
+                                       value="
+                                        @if(!isset($scoreboard))
+                                       {{ null}}
+                                       @else {{count($scoreboard->result->scoreboards)}}
+                                       @endif"></input>
                             </div>
                             <div class="form-group col-xs-3 ">
                                 <label class="control-label">Status</label>
@@ -70,9 +82,9 @@
                                     @if(isset($scoreboard))
                                         <option value="{{$scoreboard->status}}">
                                             @if($scoreboard->status == 1)
-                                                {{Aberto}}
+                                                Aberto
                                             @else
-                                                {{Encerrado}}
+                                                Encerrado
                                         </option>
                                     @endif
                                     @else

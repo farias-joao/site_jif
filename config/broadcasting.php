@@ -35,10 +35,16 @@ return [
             'key' => env('PUSHER_APP_KEY'),
             'secret' => env('PUSHER_APP_SECRET'),
             'app_id' => env('PUSHER_APP_ID'),
-            'options' => [
+            /*'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
                 'encrypted' => true,
+            ],*/
+            'options' => [
+                'host' => env('ECHO_HOST','localhost'),
+                'port' => env('ECHO_PORT',6001),
+                'scheme' => env('ECHO_SCHEME','http')
             ],
+
         ],
 
         'redis' => [

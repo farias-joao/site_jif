@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Player extends Model
 {
     public function playerteams(){
-        return $this->hasMany('App\Models\PlayerTeam');
+        return $this->hasMany('App\Models\PlayerTeam','player_id');
     }
 
     public function teams(){
